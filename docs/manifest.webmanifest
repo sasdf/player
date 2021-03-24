@@ -1,0 +1,15 @@
+{
+    "background_color": "black",
+    "description": "Audio player",
+    "display": "minimal-ui",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ],
+    "name": "Audio player",
+    "short_name": "player",
+    "start_url": "/index.html"
+}
