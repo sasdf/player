@@ -167,3 +167,11 @@ window.addEventListener('beforeinstallprompt', (e) => {
         }
     });
 });
+
+
+const pageUrl = new URL(location.href);
+const url = pageUrl.searchParams.get('url');
+if (url) {
+    $audio.src = url;
+    updateStatus();
+}
