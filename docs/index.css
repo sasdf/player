@@ -1,0 +1,152 @@
+body {
+    background-color: #202026;
+    color: #a8a0b8;
+    /*font-family: 'Roboto', sans-serif;*/
+}
+input[type=button], .button {
+    outline: 0px;
+    border: 0px;
+    padding: 1.2rem 1.5rem;
+    margin-right: 1rem;
+    background: #383858;
+    color: #ccf;
+    margin-left: 1vw;
+    box-shadow: 1px 2px 3px 2px rgba(10, 10, 0, 0.2);
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+.row {
+    margin: 2rem;
+}
+.sep {
+    margin: 2rem;
+    border: solid #555 1px;
+}
+input[type=range] {
+    width: 100%;
+}
+.template {
+    display: none;
+}
+.tile-row {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.tile-title {
+    font-size: 4vw;
+}
+.tile {
+    border-radius: 2px;
+
+    font-size: 5vw;
+
+    display: inline-block;
+    width: 25vw;
+    height: 20vw;
+    position: relative;
+    margin: 1vw;
+
+    box-shadow: 1px 2px 3px 2px rgba(10, 10, 0, 0.2);
+}
+.tile-state {
+    border-radius: 2px;
+
+    color: #ccd;
+    background: #303038;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity .3s;
+}
+.tile-center {
+    /* padding-bottom: 1.7vw; */
+    /* padding-left: 0.8vw; */
+}
+.tile-top {
+    color: #aab;
+    font-size: 45%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 5%;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+.tile-bottom {
+    color: #aab;
+    font-size: 45%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 8%;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+.tile-light {
+    background: #383858;
+    color: #ccf;
+}
+.tile-light .tile-icon-text {
+    background: #383858;
+    color: #aad;
+}
+.tile-loading {
+    opacity: 1;
+}
+.tile-float {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
+}
+.tile-float .button {
+    font-size: 2rem;
+    line-height: 2rem;
+}
+.small {
+    font-size: 50%;
+    opacity: 1;
+}
+.hidden{
+    display: none;
+}
+
+
+#logs {
+    font-size: 0.7rem;
+    font-family: 'Noto Sans Mono', monospace;
+}
+#audio{
+    width: 100%;
+    padding: 1em 1vw;
+    box-sizing: border-box;
+}
+#file{
+    display: none;
+}
+
+#history {
+    border-spacing: 0rem 1rem;
+    margin-top: -1rem;
+}
+.hist-name {
+    padding-right: 1rem;
+    line-break: anywhere;
+}
+.hist-time {
+    padding-left: 1rem;
+    border-left: 1px solid;
+}

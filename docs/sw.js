@@ -6,6 +6,7 @@ self.addEventListener('install', e => {
             '/',
             '/index.html',
             '/index.js',
+            '/index.css',
         ])),
     );
 });

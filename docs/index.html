@@ -8,71 +8,67 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <link rel="manifest" href="manifest.webmanifest">
-    <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            color: #FFFFFF;
-            background-color: #000000;
-        }
-        #selector, #controls {
-            width: 100%;
-            padding:1em;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        #audio{
-            width: 100%;
-            padding: 1em 10%;
-            box-sizing: border-box;
-        }
-        #file{
-            display: none;
-        }
-        .box{
-            width: 100px;
-            height: 100px;
-            margin: 0 1em;
-            box-sizing: border-box;
-            background: #333;
-            display: inline-block;
-            transition: all 200ms, opacity 2000ms;
-        }
-        .hidden{
-            display: none;
-        }
-        .hbox:hover,.hover{
-            background: #555;
-            outline-offset: -1.5em;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css?502339" />
 </head>
 <body>
 
-<div id="selector">
-    <input type="file" id="file" />
-    <label for="file">
-        <div class="hbox box" id="box">
-            open
+<div class="row tile-title">Player</div>
+
+<div class="row tile-row">
+    <div class="tile">
+        <div id="btn-backward" class="tile-state">
+            <div>
+                <div class="tile-center">&lt;&lt;</div>
+            </div>
         </div>
-    </label>
+    </div>
+    <div class="tile">
+        <div id="btn-pause" class="tile-state">
+            <div>
+                <div class="tile-center" style="font-size: 1.1rem">|&nbsp;|</span></div>
+            </div>
+        </div>
+        <div id="btn-play" class="tile-state">
+            <div>
+                <div class="tile-center">&gt;</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="tile">
+        <div id="btn-forward" class="tile-state">
+            <div>
+                <div class="tile-center">&gt;&gt;</div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="controls">
-    <div class="hbox box" id="backward">&lt;&lt;</div>
-    <div class="hbox box" id="play">&gt;</div>
-    <div class="hbox box hidden" id="pause">||</div>
-    <div class="hbox box" id="forward">&gt;&gt;</div>
-</div>
-
-<div id="player">
+<div class="row tile-row">
     <audio id="audio" controls></audio>
 </div>
 
-<script src="index.js"></script>
+<div class="tile-float">
+    <input type="file" id="file" />
+    <label for="file">
+        <div class="button" id="open">+</div>
+    </label>
+</div>
+
+<div class="sep"></div>
+
+<table class="row" id="history">
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+    <tr class="hist-entry"><td class="hist-name"></td><td class="hist-time"></td></tr>
+</table>
+
+<script src="index.js?2403910"></script>
 </body>
 </html>
