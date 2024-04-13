@@ -188,6 +188,9 @@ function seekforward (details) {
     const skipTime = details.seekOffset || (defaultSkipTime * getSkipScaling('forward'));
     $audio.currentTime = Math.min($audio.currentTime + skipTime, $audio.duration);
 }
+function seekto (details) {
+    return false;
+}
 
 $play.addEventListener("click", play)
 $pause.addEventListener("click", pause)
@@ -234,6 +237,7 @@ if (navigator.mediaSession) {
     try { navigator.mediaSession.setActionHandler('pause', playpause); } catch(e){console.error('no pause')}
     try { navigator.mediaSession.setActionHandler('seekbackward', seekbackward); } catch(e){console.error('no backward')}
     try { navigator.mediaSession.setActionHandler('seekforward', seekforward); } catch(e){console.error('no forward')}
+    try { navigator.mediaSession.setActionHandler('seekto', seekto); } catch(e){console.error('no seekto')}
     try { navigator.mediaSession.setActionHandler('previoustrack', seekbackward); } catch(e){console.error('no prev')}
     try { navigator.mediaSession.setActionHandler('nexttrack', seekforward); } catch(e){console.error('no next')}
 }
