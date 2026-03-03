@@ -305,5 +305,5 @@ async function loadFromUrl (url) {
 const pageUrl = new URL(location.href);
 const url = pageUrl.searchParams.get('url');
 if (url) {
-    loadFromUrl(url);
+    loadFromUrl(decodeURIComponent(url));
 }
