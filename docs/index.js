@@ -66,6 +66,9 @@ for (let i = 0; i<$histories.length; i++) {
 }
 
 function updateStatus() {
+    if ($audio.duration === null) {
+        return;
+    }
     console.log($audio.paused, $audio.currentTime, $audio.duration, $audio.playbackRate)
 
     // Update history time and save to localStorage.
@@ -103,38 +106,46 @@ function updateStatus() {
     }
 }
 
+function setTrack (url, name) {
+    $audio.src = url;
+    $audio.name = name;
+}
+
+$audio.addEventListener("loadedmetadata", e => {
+    if ($audio.duration && $audio.name) {
+        const name = $audio.name;
+        // Bring the history record to the front.
+        var found = false;
+        for (let i = 0; i<historyList.length; i++) {
+            if (historyList[i].name === name) {
+                found = true;
+                historyList.unshift(historyList.splice(i, 1)[0]);
+                break;
+            }
+        }
+        if (!found) {
+            historyList.unshift({name, time: 0, duration: $audio.duration});
+        }
+
+        // Keep last n history records.
+        if (historyList.length > $histories.length) {
+            historyList = historyList.slice(0, $histories.length);
+        }
+        renderHistory($histories.length);
+
+        // Resume timestamp.
+        $audio.currentTime = historyList[0].time;
+    }
+    updateStatus();
+});
+
 $file.addEventListener("change", function(e){
     var files = $file.files;
     if (files.length < 1) return false;
     console.log(files);
     var url = URL.createObjectURL(files[0]);
     console.log(url);
-    $audio.src = url;
-    const name = $audio.name = files[0].name;
-
-    // Bring the history record to the front.
-    var found = false;
-    for (let i = 0; i<historyList.length; i++) {
-        if (historyList[i].name === name) {
-            found = true;
-            historyList.unshift(historyList.splice(i, 1)[0]);
-            break;
-        }
-    }
-    if (!found) {
-        historyList.unshift({name, time: 0, duration: $audio.duration});
-    }
-
-    // Keep last n history records.
-    if (historyList.length > $histories.length) {
-        historyList = historyList.slice(0, $histories.length);
-    }
-    renderHistory($histories.length);
-
-    // Resume timestamp.
-    $audio.currentTime = historyList[0].time;
-    
-    updateStatus();
+    setTrack(url, files[0].name);
 });
 
 $audio.addEventListener("play", e => updateStatus())
@@ -265,10 +276,34 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 
+function parseContentDisposition (contentDisposition) {
+    let filename = /filename\*=UTF-8''([^;]+)/.exec(contentDisposition);
+    if (filename && filename.length > 1) {
+        return decodeURIComponent(filename[1]);
+    }
+    filename = /filename="([^;]+)"/.exec(contentDisposition);
+    if (filename && filename.length > 1) {
+        return decodeURIComponent(filename[1]);
+    }
+    return null;
+}
+
+async function loadFromUrl (url) {
+    let filename = null;
+    try {
+        const resp = await fetch(url, {method: 'HEAD'});
+        const contentDisp = resp.headers.get('Content-Disposition');
+        if (contentDisp) {
+            filename = parseContentDisposition(contentDisp);
+        }
+    } catch (e) {
+        console.error(e);
+    }
+    setTrack(url, filename);
+}
 
 const pageUrl = new URL(location.href);
 const url = pageUrl.searchParams.get('url');
 if (url) {
-    $audio.src = url;
-    updateStatus();
+    loadFromUrl(url);
 }
