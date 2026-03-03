@@ -11,8 +11,19 @@ self.addEventListener('install', e => {
     );
 });
 
+const workerOrigin = self.location.origin;
+console.log("Service Worker Origin:", workerOrigin);
+
+function isSameOrigin(urlString) {
+  const urlOrigin = (new URL(urlString)).origin;
+  return urlOrigin === self.location.origin;
+}
+
 self.addEventListener('fetch', e => {
     console.log(e.request.url);
+    if (e.request.method !== "GET") return;
+    if (!isSameOrigin(e.request.url)) return;
+
     if (navigator.onLine) {
         e.respondWith(
             fetch(e.request).then(resp =>
